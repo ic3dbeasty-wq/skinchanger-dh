@@ -196,12 +196,12 @@ shared.twoicy = {
         ['use display name'] = false,
         ['name above'] = false,
     },
-    ['spiderman'] = {
+    ['spiderman'] = { -- inspired by glory
         ['enabled'] = false,
         ['jumppower'] = 50,
         ['knifejumppower'] = 60,
     },
-    ['super jump'] = {
+    ['super jump'] = { -- inspired by glory
         ['enabled'] = true,
         ['jump power'] = 100,
     },
