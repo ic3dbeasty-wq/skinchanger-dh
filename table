@@ -1,0 +1,211 @@
+shared.twoicy = {
+    ['binds'] = {
+        ['silent aim'] = 'L',
+        ['cam lock'] = 'M',
+        ['triggerbot'] = 'M',
+        ['super jump'] = 'I',
+        ['esp'] = 'P',
+        ['rapid fire'] = 'C', -- dont use in yuu hood
+        ['hitbox expander'] = 'H',
+        ['sort inventory'] = 'G',
+    },
+    ['skins'] = {
+        ['enabled'] = true,
+        ['weapons'] = {
+            ['[Double-Barrel SG]'] = "Golden Age",
+            ['[Revolver]'] = "Electric",
+            ['[TacticalShotgun]'] = "Shadow",
+            ['[Knife]'] = "Golden Age Tanto",
+        },
+    },
+    ['char'] = {
+        ['enabled'] = false,
+        ['username'] = "Roblox",
+        ['headless'] = false,
+        ['remove face accessories'] = false,
+        ['animation changer'] = false,
+    },
+    ['Speed Modifications'] = {
+        ['Enabled'] = true,
+        ['ToggleKey'] = Enum.KeyCode.V,
+        ['Normal'] = {
+            ['Multiplier'] = 50
+        },
+        ['Low Health'] = {
+            ['Health Threshold'] = 35,
+            ['Multiplier'] = 2
+        }
+    },
+    ['Spread Modifications'] = {
+        ['Enabled'] = true,
+        ['Mode'] = "Fixed",
+        ['Double-Barrel SG'] = {
+            ['Fixed'] = 0,
+            ['Min'] = 0.2,
+            ['Max'] = 0.6
+        },
+        ['TacticalShotgun'] = {
+            ['Fixed'] = 0,
+            ['Min'] = 0.2,
+            ['Max'] = 0.5
+        },
+        ['Shotgun'] = {
+            ['Fixed'] = 0.9,
+            ['Min'] = 0.85,
+            ['Max'] = 0.95
+        },
+        ['DrumShotgun'] = {
+            ['Fixed'] = 0.85,
+            ['Min'] = 0.8,
+            ['Max'] = 0.9
+        },
+    },
+    ['settings'] = {
+        ['knock check'] = true,
+        ['visible check'] = true,
+        ['self knock check'] = true,
+        ['knife check'] = true,
+    },
+    ['targeting'] = {
+        ['mode'] = 'Select', -- Select/Automatic
+    },
+    ['silent aimbot'] = {
+        ['enabled'] = true,
+        ['mode'] = 'Toggle', -- Toggle/Hold
+        ['hitpart'] = 'Head', -- "Any R15 Part",  "Closest Part",  "Closest Point",
+        ['use prediction'] = false,
+        ['prediction'] = {
+            ['x'] = 0.133,
+            ['y'] = 0.133,
+            ['z'] = 0.133,
+        },
+        ['fov'] = {
+            ['enabled'] = true,
+            ['visible'] = true,
+            ['mode'] = '3D', -- 3D/2D
+            ['active color'] = Color3.fromRGB(0, 17, 255),
+            ['size'] = {
+                ['x'] = 500,
+                ['y'] = 500,
+                ['z'] = 500,
+            },
+        },
+        ['distance check'] = {
+            ['enabled'] = true,
+            ['max distance'] = 300,
+        },
+    },
+    ['camera aimbot'] = {
+        ['enabled'] = false,
+        ['mode'] = 'Toggle', -- Toggle/Hold
+        ['hitpart'] = 'Closest Part', -- "Any R15 Part",  "Closest Part",  "Closest Point",
+        ['smoothing'] = {
+            ['x'] = 40,
+            ['y'] = 40,
+            ['z'] = 40,
+        },
+        ['use prediction'] = true,
+        ['prediction'] = {
+            ['x'] = 0.133,
+            ['y'] = 0.133,
+            ['z'] = 0.133,
+        },
+        ['fov'] = {
+            ['enabled'] = true,
+            ['visible'] = true,
+            ['mode'] = '3D',
+            ['active color'] = Color3.fromRGB(0, 17, 255),
+            ['size'] = {
+                ['x'] = 10,
+                ['y'] = 10,
+                ['z'] = 10,
+            },
+        },
+        ['distance check'] = {
+            ['enabled'] = true,
+            ['max distance'] = 300,
+        },
+    },
+    ['trigger bot'] = {
+        ['enabled'] = false,
+        ['mode'] = 'Hold', -- Toggle/Hold
+        ['delay'] = 0.01,
+        ['require target'] = true,
+        ['specific weapons'] = {
+            ['enabled'] = false,
+            ['weapons'] = {
+                '[Double-Barrel SG]',
+                '[Revolver]',
+                '[TacticalShotgun]',
+            },
+        },
+        ['fov'] = {
+            ['enabled'] = true,
+            ['visible'] = true,
+            ['mode'] = '3D',
+            ['active color'] = Color3.fromRGB(0, 17, 255),
+            ['size'] = {
+                ['x'] = 10,
+                ['y'] = 10,
+                ['z'] = 10,
+            },
+        },
+        ['distance check'] = {
+            ['enabled'] = true,
+            ['max distance'] = 300,
+        },
+    },
+    ['target line'] = {
+        ['enabled'] = true,
+        ['thickness'] = 2.2,
+        ['transparency'] = 99,
+        ['vulnerable'] = Color3.fromRGB(255, 85, 127),
+        ['invulnerable'] = Color3.fromRGB(255, 255, 0),
+    },
+    ['rapid fire'] = {
+        ['enabled'] = false,
+        ['delay'] = 0.01,
+        ['specific weapons'] = {
+            ['enabled'] = false,
+            ['weapons'] = {
+                '[Revolver]',
+            },
+        },
+    },
+    ['hitbox expander'] = {
+        ['enabled'] = false,
+        ['size'] = 50,
+        ['visualize'] = false,
+    },
+    ['esp'] = {
+        ['enabled'] = true,
+        ['color'] = Color3.fromRGB(255, 255, 255),
+        ['target color'] = Color3.fromRGB(255, 0, 0),
+        ['use display name'] = false,
+        ['name above'] = false,
+    },
+    ['spiderman'] = { -- inspired by glory
+        ['enabled'] = false,
+        ['jumppower'] = 50,
+        ['knifejumppower'] = 60,
+    },
+    ['super jump'] = { -- also inspired by glory
+        ['enabled'] = true,
+        ['jump power'] = 100,
+    },
+    ['inventory sorter'] = {
+        ['enabled'] = true,
+        ['slots'] = {
+            [1] = "[Double-Barrel SG]",
+            [2] = "[Revolver]",
+            [3] = "[TacticalShotgun]",
+            [4] = "[Knife]",
+            [5] = "",
+            [6] = "",
+            [7] = "",
+            [8] = "",
+            [9] = "",
+            [10] = "",
+        },
+    },
+}
