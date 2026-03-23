@@ -19,7 +19,7 @@ shared.twoicy = {
         },
     },
     ['beam changer'] = { -- hood customs
-        ['enabled'] = false,
+        ['enabled'] = true,
         ['DoubleBarrel'] = "Beta",
         ['Revolver'] = "Beta",
         ['Shotgun'] = "Beta",
@@ -27,7 +27,7 @@ shared.twoicy = {
         ['TacticalShotgun'] = "Beta",
     },
     ['fake subscription'] = { -- hood customs
-        ['enabled'] = false,
+        ['enabled'] = true,
         ['streak'] = 53,
     },
     ['char'] = {
@@ -84,12 +84,12 @@ shared.twoicy = {
     ['silent aimbot'] = {
         ['enabled'] = true,
         ['mode'] = 'Toggle',
-        ['hitpart'] = 'Head',
-        ['use prediction'] = false,
+        ['hitpart'] = 'Head', -- "Any R15 Part",  "Closest Part",  "Closest Point",
+        ['use prediction'] = true,
         ['prediction'] = {
-            ['x'] = 0.133,
-            ['y'] = 0.133,
-            ['z'] = 0.133,
+            ['x'] = 0,
+            ['y'] = 0,
+            ['z'] = 0,
         },
         ['fov'] = {
             ['enabled'] = true,
@@ -108,13 +108,13 @@ shared.twoicy = {
         },
     },
     ['camera aimbot'] = {
-        ['enabled'] = false,
+        ['enabled'] = true,
         ['mode'] = 'Toggle',
-        ['hitpart'] = 'Closest Part',
+        ['hitpart'] = 'Head', -- "Any R15 Part",  "Closest Part",  "Closest Point",
         ['smoothing'] = {
-            ['x'] = 40,
-            ['y'] = 40,
-            ['z'] = 40,
+            ['x'] = 5,
+            ['y'] = 5,
+            ['z'] = 5,
         },
         ['use prediction'] = true,
         ['prediction'] = {
@@ -124,7 +124,7 @@ shared.twoicy = {
         },
         ['fov'] = {
             ['enabled'] = true,
-            ['visible'] = true,
+            ['visible'] = false,
             ['mode'] = '3D',
             ['active color'] = Color3.fromRGB(0, 17, 255),
             ['size'] = {
@@ -196,12 +196,12 @@ shared.twoicy = {
         ['use display name'] = false,
         ['name above'] = false,
     },
-    ['spiderman'] = { -- inspired by glory
+    ['spiderman'] = {
         ['enabled'] = false,
         ['jumppower'] = 50,
         ['knifejumppower'] = 60,
     },
-    ['super jump'] = { -- inspired by glory
+    ['super jump'] = {
         ['enabled'] = true,
         ['jump power'] = 100,
     },
