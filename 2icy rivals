@@ -1,10 +1,15 @@
-
+-- ==================== 2ICY SKIN CHANGER FOR RIVALS - FULL VERSION ====================
+-- All original skins preserved + Huge Wraps list + Customizable Toggle Key
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 
+-- ====================== CUSTOMIZABLE TOGGLE KEY ======================
+local TOGGLE_KEY = Enum.KeyCode.RightShift
+
+-- ====================== ALL YOUR ORIGINAL SKINS ======================
 local SkinLists = {
     ["Assault Rifle"] = {"Default", "AK-47", "AUG", "Tommy Gun", "Boneclaw Rifle", "Gingerbread AUG", "AKEY-47", "100K Visits"},
     ["Bow"] = {"Default", "Compound Bow", "Raven Bow", "Dream Bow", "Bat Bow", "Frostbite Bow", "Beloved Bow", "Balloon Bow", "Glorious Bow", "Key Bow"},
@@ -53,7 +58,19 @@ local SkinLists = {
     ["Permafrost"] = {"Default", "Snowman Permafrost", "Ice Permafrost", "Glorious Permafrost"},
 }
 
-_G.ActiveSelection = nil
+-- ====================== HUGE WRAPS LIST ======================
+local WrapLists = {
+    ["Default"] = {"None", "Glitter", "Cyber", "Pixel", "Frostbite", "Chrome", "Gold", "Solar", "Nebula", "Starfall",
+                   "Liquid Gold", "Thunderburst", "Encrypt", "Starblaze", "Carbon Fiber", "Hyperdrive", "Insignia",
+                   "Resolute", "Tiger", "Black Granite", "Cerulean", "Malachite", "Lightning", "Arabesque", "Webbed",
+                   "Plastic", "A5", "Amber", "Insidious", "Iridescent", "Moonstone", "Bright", "Dark", "Glass",
+                   "Water", "Danger", "Vexed", "Disco", "Supernova", "Honeycomb", "Reaper", "Blaze", "Cardinal",
+                   "Nova", "OranGG", "Cheese", "Slush", "Violet", "Cream", "DLL", "EXE", "2025", "Rivalry", "Luxe",
+                   "Heirloom", "Thunder", "Mesh", "Key", "Festive", "Wrapped", "Boneclaw", "Gingerbread", "Keythrower"},
+    
+    -- You can add weapon-specific wraps later if needed
+}
+
 _G.EquippedData = _G.EquippedData or {}
 for weapon in pairs(SkinLists) do
     if not _G.EquippedData[weapon] then
@@ -64,7 +81,6 @@ end
 local CosmeticLibrary = require(ReplicatedStorage.Modules:WaitForChild("CosmeticLibrary"))
 local ItemLibrary = require(ReplicatedStorage.Modules:WaitForChild("ItemLibrary"))
 local ReplicatedClass = require(ReplicatedStorage.Modules:WaitForChild("ReplicatedClass"))
-local ClientItem = require(player.PlayerScripts.Modules.ClientReplicatedClasses.ClientFighter.ClientItem)
 local ClientViewModel = require(player.PlayerScripts.Modules.ClientReplicatedClasses.ClientFighter.ClientItem.ClientViewModel)
 
 local function getCosmeticData(name, cType)
@@ -111,12 +127,15 @@ ClientViewModel.new = function(replicatedData, clientItem)
     return vm
 end
 
-local ScreenGui = Instance.new("ScreenGui", player.PlayerGui)
+-- ====================== GUI ======================
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "2icySkinChanger"
 ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = player.PlayerGui
 
 local Main = Instance.new("Frame", ScreenGui)
-Main.Size = UDim2.new(0, 950, 0, 620)
-Main.Position = UDim2.new(0.5, -475, 0.5, -310)
+Main.Size = UDim2.new(0, 950, 0, 700)
+Main.Position = UDim2.new(0.5, -475, 0.5, -350)
 Main.BackgroundColor3 = Color3.fromRGB(20, 20, 24)
 Main.BorderSizePixel = 0
 Main.Active = true
@@ -125,14 +144,37 @@ Main.Draggable = true
 local Title = Instance.new("TextLabel", Main)
 Title.Size = UDim2.new(1, 0, 0, 50)
 Title.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
-Title.Text = "2icy Skin Changer"
-Title.TextColor3 = Color3.fromRGB(255, 80, 80)
+Title.Text = "2icy Skin Changer (Rivals)"
+Title.TextColor3 = Color3.fromRGB(100, 200, 255)
 Title.Font = Enum.Font.GothamBlack
-Title.TextSize = 26
+Title.TextSize = 28
+
+-- Tabs
+local TabFrame = Instance.new("Frame", Main)
+TabFrame.Size = UDim2.new(1, -30, 0, 40)
+TabFrame.Position = UDim2.new(0, 15, 0, 60)
+TabFrame.BackgroundTransparency = 1
+
+local SkinTabBtn = Instance.new("TextButton", TabFrame)
+SkinTabBtn.Size = UDim2.new(0.48, 0, 1, 0)
+SkinTabBtn.BackgroundColor3 = Color3.fromRGB(60, 120, 255)
+SkinTabBtn.Text = "Skins"
+SkinTabBtn.TextColor3 = Color3.new(1,1,1)
+SkinTabBtn.Font = Enum.Font.GothamBold
+SkinTabBtn.TextSize = 18
+
+local WrapTabBtn = Instance.new("TextButton", TabFrame)
+WrapTabBtn.Size = UDim2.new(0.48, 0, 1, 0)
+WrapTabBtn.Position = UDim2.new(0.52, 0, 0, 0)
+WrapTabBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+WrapTabBtn.Text = "Wraps"
+WrapTabBtn.TextColor3 = Color3.new(1,1,1)
+WrapTabBtn.Font = Enum.Font.GothamBold
+WrapTabBtn.TextSize = 18
 
 local Left = Instance.new("Frame", Main)
-Left.Size = UDim2.new(0, 280, 1, -70)
-Left.Position = UDim2.new(0, 15, 0, 60)
+Left.Size = UDim2.new(0, 280, 1, -170)
+Left.Position = UDim2.new(0, 15, 0, 110)
 Left.BackgroundColor3 = Color3.fromRGB(28, 28, 34)
 
 local WeaponSearch = Instance.new("TextBox", Left)
@@ -154,8 +196,8 @@ WeaponLayout.Padding = UDim.new(0, 6)
 WeaponLayout.SortOrder = Enum.SortOrder.Name
 
 local Right = Instance.new("Frame", Main)
-Right.Size = UDim2.new(1, -310, 1, -70)
-Right.Position = UDim2.new(0, 305, 0, 60)
+Right.Size = UDim2.new(1, -310, 1, -170)
+Right.Position = UDim2.new(0, 305, 0, 110)
 Right.BackgroundColor3 = Color3.fromRGB(28, 28, 34)
 
 local SelectedLabel = Instance.new("TextLabel", Right)
@@ -177,6 +219,41 @@ local SkinGrid = Instance.new("UIGridLayout", SkinScroll)
 SkinGrid.CellSize = UDim2.new(0, 130, 0, 155)
 SkinGrid.CellPadding = UDim2.new(0, 15, 0, 15)
 
+-- Settings Bar
+local SettingsFrame = Instance.new("Frame", Main)
+SettingsFrame.Size = UDim2.new(1, -20, 0, 50)
+SettingsFrame.Position = UDim2.new(0, 10, 1, -60)
+SettingsFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+
+local SettingsLabel = Instance.new("TextLabel", SettingsFrame)
+SettingsLabel.Size = UDim2.new(0.35, 0, 1, 0)
+SettingsLabel.BackgroundTransparency = 1
+SettingsLabel.Text = "Current Toggle Key:"
+SettingsLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+SettingsLabel.Font = Enum.Font.Gotham
+SettingsLabel.TextSize = 16
+SettingsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local CurrentKeyLabel = Instance.new("TextLabel", SettingsFrame)
+CurrentKeyLabel.Size = UDim2.new(0.35, 0, 1, 0)
+CurrentKeyLabel.Position = UDim2.new(0.35, 0, 0, 0)
+CurrentKeyLabel.BackgroundTransparency = 1
+CurrentKeyLabel.Text = TOGGLE_KEY.Name
+CurrentKeyLabel.TextColor3 = Color3.fromRGB(100, 200, 255)
+CurrentKeyLabel.Font = Enum.Font.GothamBold
+CurrentKeyLabel.TextSize = 18
+
+local ChangeKeyBtn = Instance.new("TextButton", SettingsFrame)
+ChangeKeyBtn.Size = UDim2.new(0.25, 0, 0.8, 0)
+ChangeKeyBtn.Position = UDim2.new(0.72, 0, 0.1, 0)
+ChangeKeyBtn.BackgroundColor3 = Color3.fromRGB(60, 120, 255)
+ChangeKeyBtn.Text = "Change Key"
+ChangeKeyBtn.TextColor3 = Color3.new(1,1,1)
+ChangeKeyBtn.Font = Enum.Font.GothamBold
+ChangeKeyBtn.TextSize = 15
+
+local CurrentMode = "Skin"
+
 local function GetThumb(name)
     if ItemLibrary.ViewModels and ItemLibrary.ViewModels[name] then
         local data = ItemLibrary.ViewModels[name]
@@ -184,35 +261,18 @@ local function GetThumb(name)
         if data.Image then return data.Image end
         if data.Thumbnail then return data.Thumbnail end
     end
-    if CosmeticLibrary and CosmeticLibrary.Skins then
-        for _, tbl in pairs(CosmeticLibrary.Skins) do
-            if tbl[name] then
-                local data = tbl[name]
-                if data.ImageHighResolution then return data.ImageHighResolution end
-                if data.Image then return data.Image end
-                if data.Thumbnail then return data.Thumbnail end
-            end
-        end
-    end
-    if ItemLibrary.ViewModels and ItemLibrary.ViewModels.Bundles then
-        local bundle = ItemLibrary.ViewModels.Bundles
-        if bundle[name] then
-            local data = bundle[name]
-            if data.ImageHighResolution then return data.ImageHighResolution end
-            if data.Image then return data.Image end
-            if data.Thumbnail then return data.Thumbnail end
-        end
-    end
     return ""
 end
 
-local function EquipSkin(weapon, skin)
-    _G.EquippedData[weapon].Skin = skin
-    pcall(function() CosmeticLibrary.Equip(weapon, "Skin", skin) end)
-    pcall(function()
-        local rem = ReplicatedStorage:FindFirstChild("EquipCosmetic", true) or ReplicatedStorage.Remotes:FindFirstChild("EquipCosmetic")
-        if rem then rem:FireServer(weapon, skin) end
-    end)
+local function EquipItem(weapon, itemName, isWrap)
+    if isWrap then
+        _G.EquippedData[weapon].Wrap = itemName
+        SelectedLabel.Text = "WRAP EQUIPPED: " .. weapon .. " - " .. itemName
+    else
+        _G.EquippedData[weapon].Skin = itemName
+        SelectedLabel.Text = "SKIN EQUIPPED: " .. weapon .. " - " .. itemName
+    end
+
     pcall(function()
         local char = player.Character
         if char then
@@ -225,58 +285,70 @@ local function EquipSkin(weapon, skin)
             end
         end
     end)
-    SelectedLabel.Text = "EQUIPPED: " .. weapon .. " - " .. skin
+end
+
+local function RefreshItems(weapon)
+    for _, child in pairs(SkinScroll:GetChildren()) do
+        if child:IsA("ImageButton") then child:Destroy() end
+    end
+
+    local list = (CurrentMode == "Skin") and SkinLists[weapon] or (WrapLists[weapon] or WrapLists["Default"])
+
+    for _, item in ipairs(list or {}) do
+        local sbtn = Instance.new("ImageButton")
+        sbtn.BackgroundColor3 = Color3.fromRGB(35, 35, 42)
+        sbtn.Image = GetThumb(item)
+        sbtn.Parent = SkinScroll
+
+        local lbl = Instance.new("TextLabel", sbtn)
+        lbl.Size = UDim2.new(1,0,0,35)
+        lbl.Position = UDim2.new(0,0,1,-35)
+        lbl.BackgroundTransparency = 0.3
+        lbl.BackgroundColor3 = Color3.new(0,0,0)
+        lbl.Text = item
+        lbl.TextColor3 = Color3.new(1,1,1)
+        lbl.Font = Enum.Font.Gotham
+        lbl.TextScaled = true
+
+        sbtn.MouseButton1Click:Connect(function()
+            EquipItem(weapon, item, CurrentMode == "Wrap")
+        end)
+    end
+    SkinScroll.CanvasSize = UDim2.new(0,0,0, SkinGrid.AbsoluteContentSize.Y + 40)
 end
 
 local function MakeWeaponBtn(weapon)
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(1, -10, 0, 52)
     btn.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
-    btn.Text = "   " .. weapon
+    btn.Text = " " .. weapon
     btn.TextColor3 = Color3.new(1,1,1)
     btn.TextXAlignment = Enum.TextXAlignment.Left
     btn.Font = Enum.Font.GothamSemibold
     btn.TextSize = 16
     btn.Parent = WeaponScroll
+
     local img = Instance.new("ImageLabel", btn)
     img.Size = UDim2.new(0, 40, 0, 40)
     img.Position = UDim2.new(1, -50, 0.5, -20)
     img.BackgroundTransparency = 1
     img.Image = GetThumb(weapon)
+
     btn.MouseButton1Click:Connect(function()
         for _, b in pairs(WeaponScroll:GetChildren()) do
             if b:IsA("TextButton") then b.BackgroundColor3 = Color3.fromRGB(40,40,48) end
         end
         btn.BackgroundColor3 = Color3.fromRGB(80, 140, 255)
-        for _, child in pairs(SkinScroll:GetChildren()) do
-            if child:IsA("ImageButton") then child:Destroy() end
-        end
-        SelectedLabel.Text = weapon .. " Skins"
-        for _, skin in ipairs(SkinLists[weapon]) do
-            local sbtn = Instance.new("ImageButton")
-            sbtn.BackgroundColor3 = Color3.fromRGB(35, 35, 42)
-            sbtn.Image = GetThumb(skin)
-            sbtn.Parent = SkinScroll
-            local lbl = Instance.new("TextLabel", sbtn)
-            lbl.Size = UDim2.new(1,0,0,35)
-            lbl.Position = UDim2.new(0,0,1,-35)
-            lbl.BackgroundTransparency = 0.3
-            lbl.BackgroundColor3 = Color3.new(0,0,0)
-            lbl.Text = skin
-            lbl.TextColor3 = Color3.new(1,1,1)
-            lbl.Font = Enum.Font.Gotham
-            lbl.TextScaled = true
-            sbtn.MouseButton1Click:Connect(function()
-                EquipSkin(weapon, skin)
-            end)
-        end
-        SkinScroll.CanvasSize = UDim2.new(0,0,0, SkinGrid.AbsoluteContentSize.Y + 40)
+
+        SelectedLabel.Text = weapon .. " " .. CurrentMode .. "s"
+        RefreshItems(weapon)
     end)
 end
 
 for weapon in pairs(SkinLists) do
     MakeWeaponBtn(weapon)
 end
+
 WeaponScroll.CanvasSize = UDim2.new(0,0,0, WeaponLayout.AbsoluteContentSize.Y)
 
 WeaponSearch:GetPropertyChangedSignal("Text"):Connect(function()
@@ -289,6 +361,52 @@ WeaponSearch:GetPropertyChangedSignal("Text"):Connect(function()
     end
 end)
 
-UserInputService.InputBegan:Connect(function(i, g)
-    if not g and i.KeyCode == Enum.KeyCode.K then Main.Visible = not Main.Visible end
+-- Tab Switching
+SkinTabBtn.MouseButton1Click:Connect(function()
+    CurrentMode = "Skin"
+    SkinTabBtn.BackgroundColor3 = Color3.fromRGB(60, 120, 255)
+    WrapTabBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
 end)
+
+WrapTabBtn.MouseButton1Click:Connect(function()
+    CurrentMode = "Wrap"
+    WrapTabBtn.BackgroundColor3 = Color3.fromRGB(60, 120, 255)
+    SkinTabBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+end)
+
+-- Toggle GUI
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == TOGGLE_KEY then
+        Main.Visible = not Main.Visible
+    end
+end)
+
+-- Change Key Feature
+local isListening = false
+ChangeKeyBtn.MouseButton1Click:Connect(function()
+    if isListening then return end
+    isListening = true
+    ChangeKeyBtn.Text = "Press any key..."
+    ChangeKeyBtn.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+
+    local connection
+    connection = UserInputService.InputBegan:Connect(function(input, gp)
+        if gp or input.KeyCode == Enum.KeyCode.Unknown then return end
+        TOGGLE_KEY = input.KeyCode
+        CurrentKeyLabel.Text = TOGGLE_KEY.Name
+        ChangeKeyBtn.Text = "Change Key"
+        ChangeKeyBtn.BackgroundColor3 = Color3.fromRGB(60, 120, 255)
+        isListening = false
+        connection:Disconnect()
+        
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "2icy Skin Changer",
+            Text = "Toggle key changed to: " .. TOGGLE_KEY.Name,
+            Duration = 4
+        })
+    end)
+end)
+
+print("2icy Skin Changer for Rivals loaded successfully!")
+print("Press RightShift to toggle | Change key using bottom button")
